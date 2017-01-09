@@ -14,3 +14,18 @@ CAN_elec_gen <- subset(CAN_elec_gen, select = c("Ref_Date","Value"))
 
 #export this generation data to csv.
 write.csv(CAN_elec_gen,file = "Canadian Electricity Generation Monthly.csv",row.names = FALSE)
+
+#segmenting into just receipts and removing redundant COMPONENT column.
+CAN_elec_rec <- CAN_elec[CAN_elec$COMPONENTS == "Total receipts",]
+CAN_elec_rec <- subset(CAN_elec_rec, select = c("Ref_Date","Value"))
+
+#export this generation data to csv.
+write.csv(CAN_elec_rec,file = "Canadian Electricity Receipts Monthly.csv",row.names = FALSE)
+
+#segmenting into just receipts and removing redundant COMPONENT column.
+CAN_elec_del <- CAN_elec[CAN_elec$COMPONENTS == "Total deliveries",]
+CAN_elec_del <- subset(CAN_elec_del, select = c("Ref_Date","Value"))
+
+#export this generation data to csv.
+write.csv(CAN_elec_del,file = "Canadian Electricity Deliveries Monthly.csv",row.names = FALSE)
+
