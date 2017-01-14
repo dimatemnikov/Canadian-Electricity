@@ -1,6 +1,9 @@
 #import data.
 GEN_TABLE <- read.csv("Monthly Generation Table.csv", header=TRUE)
 
+#install.packages("Hmisc")
+library(Hmisc)
+
 #converting the Month column values from numeric to yearmon.
 mode(GEN_TABLE$Month)
 library(zoo)
@@ -29,13 +32,17 @@ rug(GEN_TABLE$Canada/1000000)
 #       lwd=2,
 #       add=TRUE)
 
-#plot receipts through time.
-ggplot(GEN_TABLE, aes(x=GEN_TABLE$Month,y=GEN_TABLE$Canada/1000000),group=1) +
-  geom_line() + geom_point() +
-  theme_bw() + theme_light() +
-  xlab("") + ylab("Electricity generation in TWh") +
-  ggtitle("Monthly Electricity Generation in Canada 2008-2015") 
-  #scale_x_date(date_minor_breaks = "1 month", date_labels = "%b %Y")
 
-#ggplot(aes(x = GEN_TABLE$Month, y = GEN_TABLE$Canada), data = GEN_TABLE) + geom_line()
+plot(months,GEN_TABLE$Canada/1000000, type="l", xlab = "Date", bty="n",xaxt="n",
+   ylab="Monthly Electricity Generation in TWh",
+   main = "Monthly Electricity Generation \n in Canada 2008 to 2015")
+  axis(side=1,at=seq(2008,2016,1), srt=45)
+ minor.tick(nx=4)
 
+ 
+ plot(months,GEN_TABLE$Canada/1000000, type="l", xlab = "Date", bty="n",xaxt="n",xlim=c(2010,2012),
+      ylab="Monthly Electricity Generation in TWh",
+      main = "Monthly Electricity Generation \n in Canada 2008 to 2015")
+ axis(side=1,at=seq(2010,2012,1), srt=45)
+ minor.tick(nx=6)
+  
